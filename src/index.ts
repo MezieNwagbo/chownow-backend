@@ -6,6 +6,9 @@ import cors from "cors";
 import "dotenv/config";
 
 import myUserRoute from "./routes/my-user.routes";
+import myRestaurantRoute from "./routes/my-restaurant.routes";
+
+import { v2 as cloudinary } from "cloudinary";
 
 //connect database
 const connectToDatabase = async () => {
@@ -19,6 +22,13 @@ const connectToDatabase = async () => {
   }
 };
 
+//cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -28,6 +38,7 @@ app.get("/health", async (req: Request, res: Response) => {
 });
 
 app.use("/api/my/user", myUserRoute);
+app.use("/api/my/restaurant", myRestaurantRoute);
 
 app.listen(7500, async () => {
   console.log("Server started on localhost 7500");

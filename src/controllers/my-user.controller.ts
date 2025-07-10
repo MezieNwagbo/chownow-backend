@@ -22,7 +22,7 @@ export const createCurrentUserHandler: AsynFunctionType = async (req, res) => {
     const existingUser = await User.findOne({ auth0Id });
 
     if (existingUser) {
-      res.status(200).send();
+      return res.status(200).send();
     }
 
     const newUser = new User(req.body);
