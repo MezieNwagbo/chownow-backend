@@ -7,6 +7,7 @@ import "dotenv/config";
 
 import myUserRoute from "./routes/my-user.routes";
 import myRestaurantRoute from "./routes/my-restaurant.routes";
+import restaurantRoute from "./routes/restaurant-routes";
 
 import { v2 as cloudinary } from "cloudinary";
 
@@ -39,6 +40,7 @@ app.get("/health", async (req: Request, res: Response) => {
 
 app.use("/api/my/user", myUserRoute);
 app.use("/api/my/restaurant", myRestaurantRoute);
+app.use("/api/restaurant", restaurantRoute);
 
 app.listen(7500, async () => {
   console.log("Server started on localhost 7500");
